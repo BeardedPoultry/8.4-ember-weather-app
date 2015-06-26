@@ -1,7 +1,7 @@
 @import 'bower_components/bourbon/app/assets/stylesheets/bourbon';
-$gutter: 0em;
 @import 'bower_components/neat/app/assets/stylesheets/neat';
 
-body{
-	background-color: rgba(189, 189, 189, 1);
+.ember-application{
+	background-color: rgba(222, 218, 217, 1);
+	text-align: center;
 }
