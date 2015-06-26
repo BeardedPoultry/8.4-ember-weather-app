@@ -1,0 +1,1 @@
+/Users/Gabriel/Documents/IronYard/8.4-ember-weather-app/tmp/tree_merger-tmp_dest_dir-gkw2nAEH.tmp/controllers/object.js
