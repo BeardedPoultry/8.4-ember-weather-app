@@ -37,7 +37,34 @@ define('untitled-folder/controllers/object', ['exports', 'ember'], function (exp
 });
 define('untitled-folder/geolocation', function () {
 
-	'use strict';
+  'use strict';
+
+  var elMap = document.getElementById('loc'); // HTML element
+  var msg = 'Sorry, we were unable to get your location.'; // No location msg
+
+  if (Modernizr.geolocation) {
+    // Is geo supported
+    navigator.geolocation.getCurrentPosition(success, fail); // Ask for location
+    elMap.textContent = 'Checking location...'; // Say checking...
+  } else {
+    // Not supported
+    elMap.textContent = msg; // Add manual entry
+  }
+
+  function success(location) {
+    // Got location
+    msg = '<h3>Longitude:<br>'; // Create message
+    msg += location.coords.longitude + '</h3>'; // Add longitude
+    msg += '<h3>Latitude:<br>'; // Create message
+    msg += location.coords.latitude + '</h3>'; // Add latitude
+    elMap.innerHTML = msg; // Show location
+  }
+
+  function fail(msg) {
+    // Not got location
+    elMap.textContent = msg; // Show text input
+    console.log(msg.code); // Log the error
+  }
 
 });
 define('untitled-folder/initializers/app-version', ['exports', 'untitled-folder/config/environment', 'ember'], function (exports, config, Ember) {
@@ -148,7 +175,7 @@ define('untitled-folder/templates/application', ['exports'], function (exports) 
       },
       render: function render(context, env, contextualElement) {
         var dom = env.dom;
-        var hooks = env.hooks, content = hooks.content;
+        var hooks = env.hooks, element = hooks.element, content = hooks.content;
         dom.detectNamespace(contextualElement);
         var fragment;
         if (env.useFragmentCache && dom.canClone) {
@@ -166,8 +193,50 @@ define('untitled-folder/templates/application', ['exports'], function (exports) 
         } else {
           fragment = this.build(dom);
         }
+        var element0 = dom.childAt(fragment, [2, 3]);
         var morph0 = dom.createMorphAt(fragment,4,4,contextualElement);
+        element(env, element0, context, "action", ["loc"], {});
         content(env, morph0, context, "outlet");
+        return fragment;
+      }
+    };
+  }()));
+
+});
+define('untitled-folder/templates/components/location', ['exports'], function (exports) {
+
+  'use strict';
+
+  exports['default'] = Ember.HTMLBars.template((function() {
+    return {
+      isHTMLBars: true,
+      revision: "Ember@1.12.0",
+      blockParams: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      build: function build(dom) {
+        var el0 = dom.createDocumentFragment();
+        return el0;
+      },
+      render: function render(context, env, contextualElement) {
+        var dom = env.dom;
+        dom.detectNamespace(contextualElement);
+        var fragment;
+        if (env.useFragmentCache && dom.canClone) {
+          if (this.cachedFragment === null) {
+            fragment = this.build(dom);
+            if (this.hasRendered) {
+              this.cachedFragment = fragment;
+            } else {
+              this.hasRendered = true;
+            }
+          }
+          if (this.cachedFragment) {
+            fragment = dom.cloneNode(this.cachedFragment, true);
+          }
+        } else {
+          fragment = this.build(dom);
+        }
         return fragment;
       }
     };
@@ -374,7 +443,7 @@ catch(err) {
 if (runningTests) {
   require("untitled-folder/tests/test-helper");
 } else {
-  require("untitled-folder/app")["default"].create({"name":"untitled-folder","version":"0.0.0."});
+  require("untitled-folder/app")["default"].create({"name":"untitled-folder","version":"0.0.0.514c8b51"});
 }
 
 /* jshint ignore:end */

@@ -1,1 +1,0 @@
-/Users/Gabriel/Documents/IronYard/8.4-ember-weather-app/tmp/funnel-dest_jyob7A.tmp/ember-qunit-notifications/index.js
