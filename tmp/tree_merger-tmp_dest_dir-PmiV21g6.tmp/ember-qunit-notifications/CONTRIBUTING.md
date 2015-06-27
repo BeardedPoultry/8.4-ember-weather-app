@@ -1,1 +1,0 @@
-/Users/Gabriel/Documents/IronYard/8.4-ember-weather-app/tmp/funnel-dest_PkfIXU.tmp/ember-qunit-notifications/CONTRIBUTING.md

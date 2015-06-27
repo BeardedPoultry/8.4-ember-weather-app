@@ -1,1 +1,0 @@
-/Users/Gabriel/Documents/IronYard/8.4-ember-weather-app/tmp/babel-cache_path-o7UtXG4Z.tmp/6
